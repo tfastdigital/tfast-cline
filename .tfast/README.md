@@ -29,10 +29,10 @@ Keep TFast-specific integration code in a separate module where practical and mi
 
 ## Separate extension identity
 
-Before distributing a custom VSIX, use `.tfast/extension-identity.json` as the intended manifest identity. It is configuration for future packaging, not an active manifest override. Upstream source and build manifests are intentionally preserved in this initial fork setup. A release build must apply that identity, verify provider callbacks and package references, and be tested in VS Code.
+Run `node .tfast/build.mjs` to build a custom VSIX. The wrapper applies `.tfast/extension-identity.json` during the production build, updates contributed command and view IDs using Cline's nightly-build convention, and restores the upstream manifest afterward. Output is written to `.tfast/artifacts/`. The authentication redirect uses the configured extension identity. The wrapper never publishes a release.
 
-Use a dedicated VS Code profile named `TFast Dev AI` for the custom extension. Cline's command and view IDs still overlap, so do not enable the official Cline extension in the same profile. Changing the publisher/name alone does not make both extensions compatible side by side. Marketplace publication requires ownership of the publisher account; this setup does not publish anything.
+Use a dedicated VS Code profile named `TFast Dev AI` for the custom extension. Although contributed command and view IDs are renamed, coexistence with official Cline is not validated. Marketplace publication requires ownership of the publisher account. API-key providers can be configured in the extension; hosted OAuth providers may require registering the fork's callback URI with the service operator.
 
 ## Setup validation
 
-The initial setup validates Git remotes, branch ancestry, and the upstream-check helper. It does not certify a production extension build or a live model request. Keep inherited release/publishing workflows disabled unless intentionally configured for this fork.
+See [BUILD-RESULT.md](BUILD-RESULT.md) for production build and packaged VS Code activation results. Live model requests require provider configuration. Keep inherited release/publishing workflows disabled unless intentionally configured for this fork.
