@@ -1,0 +1,9 @@
+{
+  "name": "tfast-dev-ai",
+  "displayName": "TFast Dev AI (Cline fork)",
+  "publisher": "tfastdigital",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tfastdigital/tfast-cline.git"
+  }
+}
